@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
-function CategoriesScreen({ navigation: { navigate } }) {
+function CategoriesScreen({ navigation: { navigate, push, goBack, replace } }) {
   const { screen } = styles;
   return (
     <View style={screen}>
@@ -10,6 +10,12 @@ function CategoriesScreen({ navigation: { navigate } }) {
         title="Go to meals"
         onPress={() => {
           navigate("CategoryMeals");
+        }}
+      />
+      <Button
+        title="Go to meals"
+        onPress={() => {
+          replace("CategoryMeals");
         }}
       />
     </View>
