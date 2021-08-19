@@ -1,29 +1,29 @@
 import React from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
-import Colors from "../constants/Colors";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import CategoryGridTile from "../components/CategoryGridTile";
 
-import { CATEGORIES } from "../data/dummy-data";
+import { CATEGORIES, MEALS } from "../data/dummy-data";
 
 function CategoryMealsScreen({ navigation: { navigate, goBack, getParam } }) {
   const catId = getParam("categoryId");
+
+  const displayedMeals = MEALS.filter(
+    (meal) => meal.categoryIds.indexOf(catId) >= 0
+  );
   const { screen } = styles;
+
+  const renderMealItem = (itemData) => {
+    return (
+      <View>
+        <Text>{itemData.item.title}</Text>
+      </View>
+    );
+  };
 
   const selectedCategory = CATEGORIES.find((category) => category.id === catId);
   return (
     <View style={screen}>
-      <Text>{selectedCategory.title}</Text>
-      <Button
-        title="Go to meal details"
-        onPress={() => {
-          navigate("MealDetails");
-        }}
-      />
-      <Button
-        title="Go Back"
-        onPress={() => {
-          goBack();
-        }}
-      />
+      <FlatList data={displayedMeals} renderItem={renderMealItem} />
     </View>
   );
 }
@@ -34,10 +34,6 @@ CategoryMealsScreen.navigationOptions = ({ navigation: { getParam } }) => {
 
   return {
     title: selectedCategory.title,
-    headerStyle: {
-      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
-    },
-    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
   };
 };
 
