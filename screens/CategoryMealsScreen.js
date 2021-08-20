@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import CategoryGridTile from "../components/CategoryGridTile";
+import MealItem from "../components/MealItem";
 
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 
@@ -14,16 +15,22 @@ function CategoryMealsScreen({ navigation: { navigate, goBack, getParam } }) {
 
   const renderMealItem = (itemData) => {
     return (
-      <View>
-        <Text>{itemData.item.title}</Text>
-      </View>
+      <MealItem
+        title={itemData.item.title}
+        onSelectMeal={() => {}}
+        duration={itemData.item.duration}
+      />
     );
   };
 
   const selectedCategory = CATEGORIES.find((category) => category.id === catId);
   return (
     <View style={screen}>
-      <FlatList data={displayedMeals} renderItem={renderMealItem} />
+      <FlatList
+        data={displayedMeals}
+        renderItem={renderMealItem}
+        style={{ width: "100%", padding: 10 }}
+      />
     </View>
   );
 }

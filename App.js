@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { enableScreens } from "react-native-screens";
@@ -18,7 +18,11 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <MealsNavigator />;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <MealsNavigator />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
