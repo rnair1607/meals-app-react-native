@@ -17,8 +17,18 @@ function CategoryMealsScreen({ navigation: { navigate, goBack, getParam } }) {
     return (
       <MealItem
         title={itemData.item.title}
-        onSelectMeal={() => {}}
+        onSelectMeal={() => {
+          navigate({
+            routeName: "MealDetails",
+            params: {
+              mealId: itemData.item.id,
+            },
+          });
+        }}
         duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        image={itemData.item.imageUrl}
       />
     );
   };

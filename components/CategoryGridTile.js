@@ -35,7 +35,12 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     height: 150,
     borderRadius: 10,
-    overflow: "hidden",
+    elevation: 5,
+
+    overflow:
+      Platform.OS && Platform.Version >= 21 === "android"
+        ? "hidden"
+        : "visible",
     // alignItems: "center",
     // backgroundColor: color,
   },
@@ -45,7 +50,7 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.26,
-    elevation: 3,
+
     shadowRadius: 10,
     padding: 15,
     justifyContent: "flex-end",
