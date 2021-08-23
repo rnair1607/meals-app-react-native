@@ -1,23 +1,16 @@
-import React from "react";
+import React from 'react';
 import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  Platform,
-  TouchableNativeFeedback,
-  ImageBackground,
-} from "react-native";
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground
+} from 'react-native';
 
-function MealItem(props) {
-  let Touchablecmp = TouchableOpacity;
-
-  if (Platform.OS === "android" && Platform.Version >= 21) {
-    Touchablecmp = TouchableNativeFeedback;
-  }
+const MealItem = props => {
   return (
     <View style={styles.mealItem}>
-      <Touchablecmp onPress={props.onSelectMeal}>
+      <TouchableOpacity onPress={props.onSelectMeal}>
         <View>
           <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
             <ImageBackground
@@ -33,52 +26,52 @@ function MealItem(props) {
           </View>
           <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
             <Text>{props.duration}m</Text>
-            <Text>{props.complexity}</Text>
-            <Text>{props.affordability}</Text>
+            <Text>{props.complexity.toUpperCase()}</Text>
+            <Text>{props.affordability.toUpperCase()}</Text>
           </View>
         </View>
-      </Touchablecmp>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  mealRow: {
-    flexDirection: "row",
-  },
   mealItem: {
     height: 200,
-    width: "100%",
-    marginBottom: 10,
-    backgroundColor: "#f5f5f5",
+    width: '100%',
+    backgroundColor: '#f5f5f5',
     borderRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
+    marginVertical: 10
+  },
+  bgImage: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-end',
+  },
+  mealRow: {
+    flexDirection: 'row'
   },
   mealHeader: {
-    height: "85%",
+    height: '85%'
   },
   mealDetail: {
     paddingHorizontal: 10,
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "15%",
-  },
-  bgImage: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "flex-end",
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '15%'
   },
   titleContainer: {
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: 'rgba(0,0,0,0.5)',
     paddingVertical: 5,
-    paddingHorizontal: 12,
+    paddingHorizontal: 12
   },
   title: {
-    fontSize: 22,
-    color: "white",
-    fontFamily: "open-sans-bold",
-
-    textAlign: "center",
-  },
+    fontFamily: 'open-sans-bold',
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center'
+  }
 });
+
 export default MealItem;

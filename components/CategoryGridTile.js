@@ -1,65 +1,62 @@
-import React from "react";
+import React from 'react';
 import {
-  StyleSheet,
-  Text,
   TouchableOpacity,
   View,
+  Text,
+  StyleSheet,
   Platform,
-  TouchableNativeFeedback,
-} from "react-native";
+  TouchableNativeFeedback
+} from 'react-native';
 
-function CategoryGridTile({ title, onSelect, color }) {
-  let Touchablecmp = TouchableOpacity;
+const CategoryGridTile = props => {
+  let TouchableCmp = TouchableOpacity;
 
-  if (Platform.OS === "android" && Platform.Version >= 21) {
-    Touchablecmp = TouchableNativeFeedback;
+  if (Platform.OS === 'android' && Platform.Version >= 21) {
+    TouchableCmp = TouchableNativeFeedback;
   }
-  const { gridItemStyle, container } = styles;
   return (
-    <View style={gridItemStyle}>
-      <Touchablecmp style={{ flex: 1 }} onPress={onSelect}>
-        <View style={{ ...container, ...{ backgroundColor: color } }}>
+    <View style={styles.gridItem}>
+      <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>
+        <View
+          style={{ ...styles.container, ...{ backgroundColor: props.color } }}
+        >
           <Text style={styles.title} numberOfLines={2}>
-            {title}
+            {props.title}
           </Text>
         </View>
-      </Touchablecmp>
+      </TouchableCmp>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  gridItemStyle: {
+  gridItem: {
     flex: 1,
     margin: 15,
-    // justifyContent: "center",
     height: 150,
     borderRadius: 10,
-    elevation: 5,
-
     overflow:
-      Platform.OS && Platform.Version >= 21 === "android"
-        ? "hidden"
-        : "visible",
-    // alignItems: "center",
-    // backgroundColor: color,
+      Platform.OS === 'android' && Platform.Version >= 21
+        ? 'hidden'
+        : 'visible',
+    elevation: 5
   },
   container: {
     flex: 1,
     borderRadius: 10,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
+    shadowColor: 'black',
     shadowOpacity: 0.26,
-
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
     padding: 15,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
   },
   title: {
-    fontFamily: "open-sans-bold",
-    fontSize: 20,
-    textAlign: "right",
-  },
+    fontFamily: 'open-sans-bold',
+    fontSize: 22,
+    textAlign: 'right'
+  }
 });
+
 export default CategoryGridTile;

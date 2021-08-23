@@ -1,65 +1,53 @@
-import React from "react";
+import React from 'react';
 import {
-  Button,
-  StyleSheet,
-  FlatList,
-  Text,
   View,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
-import CategoryGridTile from "../components/CategoryGridTile";
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
 
-import Colors from "../constants/Colors";
-import { CATEGORIES } from "../data/dummy-data";
+import { CATEGORIES } from '../data/dummy-data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
-function CategoriesScreen({ navigation: { navigate, push, goBack, replace } }) {
-  const { screen, gridItemStyle } = styles;
-
-  const renderGridItem = (itemData) => {
+const CategoriesScreen = props => {
+  const renderGridItem = itemData => {
     return (
       <CategoryGridTile
         title={itemData.item.title}
         color={itemData.item.color}
         onSelect={() => {
-          navigate({
-            routeName: "CategoryMeals",
+          props.navigation.navigate({
+            routeName: 'CategoryMeals',
             params: {
-              categoryId: itemData.item.id,
-            },
+              categoryId: itemData.item.id
+            }
           });
         }}
       />
     );
   };
-  return (
-    <FlatList numColumns={2} data={CATEGORIES} renderItem={renderGridItem} />
-    // <View style={screen}>
-    //   <Text>Categories screen</Text>
-    //   <Button
-    //     title="Go to meals"
-    //     onPress={() => {
-    //       navigate("CategoryMeals");
-    //     }}
-    //   />
-    //   <Button
-    //     title="Go to meals"
-    //     onPress={() => {
-    //       replace("CategoryMeals");
-    //     }}
-    //   />
-    // </View>
-  );
-}
 
-// CategoriesScreen.navigationOptions = {
-//   title: "",
-// };
+  return (
+    <FlatList
+      keyExtractor={(item, index) => item.id}
+      data={CATEGORIES}
+      renderItem={renderGridItem}
+      numColumns={2}
+    />
+  );
+};
+
+CategoriesScreen.navigationOptions = {
+  headerTitle: 'Meal Categories'
+};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
+
 export default CategoriesScreen;
