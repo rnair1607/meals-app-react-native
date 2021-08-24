@@ -4,10 +4,19 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { enableScreens } from "react-native-screens";
 import { StatusBar } from "expo-status-bar";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
 import MealsNavigator from "./navigation/MealsNavigator";
+import mealsReducer from "./store/reducers/meals";
 
 enableScreens();
+
+const rootReducer = combineReducers({
+  meals: mealsReducer,
+});
+
+const store = createStore(rootReducer);
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -20,7 +29,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 35 }}>
-      <MealsNavigator />
+      <Provider store={store}>
+        <MealsNavigator />
+      </Provider>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
