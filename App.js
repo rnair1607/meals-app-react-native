@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { enableScreens } from "react-native-screens";
+import { StatusBar } from "expo-status-bar";
 
 import MealsNavigator from "./navigation/MealsNavigator";
 
@@ -18,8 +19,9 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: 35 }}>
       <MealsNavigator />
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
